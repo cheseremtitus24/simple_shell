@@ -1,0 +1,74 @@
+#include "main.h"
+
+char *peek(op_t *array)
+{
+    if(is_empty(array))
+    {
+        //strerror("logic_error");
+        //fprintf(stderr,"logic_error");
+        perror("logic_error");
+        return NULL;
+    }
+    //throw std::logic_error("logic_error");
+    return array->arr[0];
+}
+void print(op_t *array)
+{
+    int index;
+    for (index = 0; index < array->_size; index++)
+        printf("%s\n",array->arr[index]);
+}
+bool is_full(op_t *array)
+{
+    if (array->_size >= array->_capacity)
+        return true;
+}
+
+bool is_empty(op_t *array)
+{
+    if(array->_size == 0)
+        return true;
+    return false;
+}
+
+bool enqueue(op_t *array, char *str)
+{
+    if (!str)
+        return false;
+
+    if (array->_capacity == 0)
+    {
+        array->arr = (char **)malloc((array->_capacity = 3) * sizeof(char *));
+        if (!array->arr)
+            return false;
+        array->arr[array->_size++] = str;
+        return true;
+    }
+    else if(array->_capacity == array->_size)
+    {
+        array->arr = (char **) realloc(array->arr, (array->_capacity *= 1.5) * sizeof(char *));
+        if (!array->arr)
+            return false;
+        array->arr[array->_size++]  = str;
+        return true;
+    }
+    else
+    {
+        array->arr[array->_size++]  = str;
+        return true;
+    }
+}
+bool dequeue(op_t *array)
+{
+    bool status = is_empty(array);
+    if (status)
+        return false;
+    int index = 0;
+    int i;
+    for (i = index; i < array->_size; ++i)
+        array->arr[i] = array->arr[i + 1]; // copy next element left
+    array->_size--;
+
+    return true;
+
+}
