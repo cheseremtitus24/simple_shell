@@ -1,6 +1,6 @@
-//
-// Created by lab on 11/18/22.
-//
+/**
+ *Created by lab on 11/18/22.
+ */
 #include "main.h"
 
 
@@ -11,21 +11,24 @@
 */
 
 int _cmd_input_tokenizer(char *command_input, char **argv, op_t *pOp) {
-    const char *whitespace = " \n\r\f\t\v";
+    /* stores path to the redirection file ls -a > file.txt*/
+    char __attribute__((unused)) *outfile_path;
     char *token;
-    char *command;
+    /*stores environment name lookup value e.g HOME="/root/" env_val="/root/"*/
+    char __attribute__((unused)) *env_val;
+    int counter;
+    const char *whitespace = " \n\r\f\t\v";
     char *temp = strdup(command_input);
     token = strtok(temp, whitespace);
-    /* stores path to the redirection file ls -a > file.txt*/
-    char *outfile_path = NULL;
-    /*stores environment name lookup value e.g HOME="/root/" env_val="/root/"*/
-    char *env_val = NULL;
 
-    int counter = 0;
+    counter = 0;
     /**
      * Initialize commands_counter to 0 so that we may be able to capture
      * the first command
      */
+    outfile_path = NULL;
+    counter = 0;
+    env_val = NULL;
 
 
     /**
@@ -56,11 +59,11 @@ int _cmd_input_tokenizer(char *command_input, char **argv, op_t *pOp) {
 
                 if(file_exists(token) && is_regular_file(token))
                 {
-//                    printf("The first cmd argument is %s\n", token);
+/*                    printf("The first cmd argument is %s\n", token);*/
                     /* Save the first token to a linked list queue*/
                     if (enqueue(pOp, token)) {
-//                        print(pOp);
-                        //printf("\nCapacity is %d and size is %d \n", pOp->_capacity, pOp->_size);
+/*                        print(pOp);*/
+                        /*printf("\nCapacity is %d and size is %d \n", pOp->_capacity, pOp->_size);*/
                     } else {
                         perror("queue enqueue error");
                     }
@@ -75,7 +78,7 @@ int _cmd_input_tokenizer(char *command_input, char **argv, op_t *pOp) {
                     /* Show Error that File or Directory not found */
                 else
                 {
-                    //fprintf(stderr,"%s: %s: No such file or directory\n",argv[0],token);
+                    /*fprintf(stderr,"%s: %s: No such file or directory\n",argv[0],token);*/
                     printf("%s: %s: No such file or directory\n",argv[0],token);
                     return (-1);
 
@@ -98,9 +101,9 @@ int _cmd_input_tokenizer(char *command_input, char **argv, op_t *pOp) {
 
                     enqueue(pOp,token);
 
-                //TODO: Create an option that will be used to overwrite the first item in array_queue
-                // Modify the _cmd_path_search so that it will be returning a malloc'd string
-                // then use this string to overwrite the array item at index 0
+                /*TODO: Create an option that will be used to overwrite the first item in array_queue*/
+                /* Modify the _cmd_path_search so that it will be returning a malloc'd string*/
+                /* then use this string to overwrite the array item at index 0*/
 
                 /* Set env val expansion to true*/
                 pOp->env_val_expansion = true;
@@ -121,27 +124,27 @@ int _cmd_input_tokenizer(char *command_input, char **argv, op_t *pOp) {
                  * be saved else where maybe on a different structure
                  *
                  */
-//                 return (0);
+/*                 return (0);*/
 
             }
 
             else if (strchr(token, '>') != NULL)
             {
                 printf("> detected %s\n", token);
-//                return (0);
+/*                return (0);*/
 
             }
            else if (strchr(token, '$') != NULL)
            {
                printf("$ detected in %s\n",token);
-//               return (0);
+/*               return (0);*/
            }
 
             else
             {
                 /* Just Add token to queue */
                 enqueue(pOp, token);
-//                return (0);
+/*                return (0);*/
             }
         }
 
@@ -157,7 +160,7 @@ bool ReportError(char *filepath, char **argv) {
     struct stat sb;
 
     if (lstat(filepath, &sb) == -1) {
-//        perror(filepath);
+/*        perror(filepath);*/
         return false;
     } else {
         switch (sb.st_mode & S_IFMT) {

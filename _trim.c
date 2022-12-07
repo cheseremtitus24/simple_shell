@@ -1,6 +1,4 @@
-//
-// Created by lab on 11/18/22.
-//
+/* Created by lab on 11/18/22.*/
 
 
 /**
@@ -29,7 +27,7 @@ void _trim(char *str)
         str[i] = str[i + index];
         i++;
     }
-    str[i] = '\0'; // Terminate string with NULL
+    str[i] = '\0'; /* Terminate string with NULL*/
 
 
     /*

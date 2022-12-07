@@ -1,6 +1,4 @@
-//
-// Created by lab on 11/19/22.
-//
+/* Created by lab on 11/19/22.*/
 #include "main.h"
 /**
  * _getenv- Retrieves a malloc'd Value of an Environment Variable
@@ -11,7 +9,6 @@ char *_getenv(char *env_name)
 {
     char *value = NULL;
     char *retval = NULL;
-    unsigned int i;
 
     value = getenv(env_name);
     retval = strdup(value);

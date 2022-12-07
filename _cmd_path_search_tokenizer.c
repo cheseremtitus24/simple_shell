@@ -1,44 +1,50 @@
-//
-// Created by lab on 11/19/22.
-//
+/**
+ *Created by lab on 11/19/22.
+*/
 
 
 /*
-
-    This program illustrates reading and parsing
-    command-line input based on a : character.
-
+ *   This program illustrates reading and parsing
+ *   command-line input based on a : character.
 */
+
 #include "main.h"
 
-char *_cmd_path_search_tokenizer(const char *binary_name, op_t *array_queue)
+char *_cmd_path_search_tokenizer(const char *binary_name, op_t __attribute__((unused)) *array_queue)
 {
 
     const char *colon = ":";
     char *token;
-    char *temp_bin_path = malloc(sizeof(char));
-    char *path = SYSTEM_BIN_PATH;
+    char *temp_bin_path;
+    char *path;
     char *tmp;
-    char *retval = NULL;
+    char *retval;
     char *value;
-    char *path_values = _getenv(path);
+    char *path_values;
     unsigned int i, j;
-    int enqueue_counter = 0;
-    bool kill_loop = false;
-
+    bool kill_loop;
+    int __attribute__((unused)) enqueue_counter;
     /* Copy a set of paths into the buffer. */
-    //char *buffer = malloc(sizeof(path_values) * sizeof(char));
+    /*char *buffer = malloc(sizeof(path_values) * sizeof(char));*/
     char buffer[SYSTEM_PATH_ARRAY_SIZE_STRING];
+
+    temp_bin_path = malloc(sizeof(char));
+    path = SYSTEM_BIN_PATH;
+    path_values = _getenv(path);
+    enqueue_counter = 0;
+    retval = NULL;
+    kill_loop = false;
+
 
     strcpy(buffer, path_values);
 
     /* Print the paths. */
 
-//    printf("\nThese are the paths:  %s\n", buffer);
+/*    printf("\nThese are the paths:  %s\n", buffer);*/
 
     /* Print the paths broken into colon-delimited tokens. */
 
-//    printf("\nThese are the paths parsed into colon-delimited tokens (one per line):  \n\n");
+/*    printf("\nThese are the paths parsed into colon-delimited tokens (one per line):  \n\n");*/
 
     token = strtok(buffer, colon);
 
@@ -90,7 +96,7 @@ char *_cmd_path_search_tokenizer(const char *binary_name, op_t *array_queue)
     }
     if (retval)
         value = strdup(retval);
-//    free(temp_bin_path);
+/*    free(temp_bin_path);*/
 
     return (value);
 

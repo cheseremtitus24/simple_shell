@@ -22,7 +22,7 @@ bool file_exists(char *filepath) {
     struct stat sb;
 
     if (lstat(filepath, &sb) == -1) {
-//        perror(filepath);
+/*        perror(filepath);*/
         return false;
     } else {
         return true;

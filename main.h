@@ -30,31 +30,6 @@ bool file_exists(char *filepath); /*checks if file exists given its full path*/
 bool ReportError(char *token, char **argv ); /* report error when binary is not found*/
 int is_regular_file(const char* path);/* check if a file in a path is a regular file*/
 int isDirectory(const char* path);/* checks if a file is a directory*/
-/**
- * struct op - Struct op
- *
- * @op: The operator
- * @f: The function associated
- */
-/*
-typedef struct op
-{
- */
-    /**
-     * To hold cmd line arguments can use
-     * a dynamic array that holds pointers to dynamically
-     * allocated strings.
-     */
-
-	//char *op;
-	/*gives status of whether file redirection should be done*/
-	//int _size;
-	//int _capacity;
-	//bool redirect_cmd; /* once redirection has been handled set this to false*/
-	//char* filename2_redir_output;
-
-//	int (*f)(int a, int b);
-//} op_t;
 
 typedef struct command_args
 {

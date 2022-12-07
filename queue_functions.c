@@ -4,17 +4,18 @@ char *peek(op_t *array)
 {
     if(is_empty(array))
     {
-        //strerror("logic_error");
-        //fprintf(stderr,"logic_error");
+        /*strerror("logic_error");*/
+        /*fprintf(stderr,"logic_error");*/
         perror("logic_error");
         return NULL;
     }
-    //throw std::logic_error("logic_error");
+    /*throw std::logic_error("logic_error");*/
     return array->arr[0];
 }
 void print(op_t *array)
 {
-    int index;
+    unsigned int index;
+
     for (index = 0; index < array->_size; index++)
         printf("%s\n",array->arr[index]);
 }
@@ -22,6 +23,7 @@ bool is_full(op_t *array)
 {
     if (array->_size >= array->_capacity)
         return true;
+    return false;
 }
 
 bool is_empty(op_t *array)
@@ -60,13 +62,15 @@ bool enqueue(op_t *array, char *str)
 }
 bool dequeue(op_t *array)
 {
-    bool status = is_empty(array);
+    unsigned int i, index;
+    bool status;
+    
+    status = is_empty(array);
     if (status)
         return false;
-    int index = 0;
-    int i;
+    index = 0;
     for (i = index; i < array->_size; ++i)
-        array->arr[i] = array->arr[i + 1]; // copy next element left
+        array->arr[i] = array->arr[i + 1]; /* copy next element left*/
     array->_size--;
 
     return true;

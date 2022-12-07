@@ -8,19 +8,22 @@ void reset(op_t *pArray);
  * main - gets the pid and parent pid of a running process
  * Return: 0
  */
-int main(int argc, char **argv) {
+int main(int __attribute__((unused)) argc, char **argv) {
     int bytes_read, input_args_status;
     bool maintain_runtime_loop;
     bool no_eof_present;
     size_t nbytes;
-    char *command_input = NULL;
-    int command_counter_control;
-    char *temp = NULL;
+    char *command_input;
+    char *temp;
     char *expanded_command_path;
     int stringlen;
-    char **temp_ptr_arr;
+    int __attribute__((unused))command_counter_control;
+    char __attribute__((unused))**temp_ptr_arr;
+    op_t command_argument_struct_exec;
 
 
+    command_input = NULL;
+    temp = NULL;
     maintain_runtime_loop = true;
     no_eof_present = true;
     /* repeat until a blank line is input */
@@ -28,7 +31,10 @@ int main(int argc, char **argv) {
 
         /* reset our counter once a single loop finishes*/
         temp_ptr_arr = (char **) malloc(ARG_ARR_SIZE * sizeof(char *));
-        op_t command_argument_struct_exec = {temp_ptr_arr, 3, 0};
+        command_argument_struct_exec.arr = temp_ptr_arr;
+	command_argument_struct_exec._capacity = 3;
+	command_argument_struct_exec._size = 0;
+       command_argument_struct_exec.env_val_expansion=	false;
         reset(&command_argument_struct_exec);
 
 
@@ -40,13 +46,13 @@ int main(int argc, char **argv) {
         /*printf("The bytes that have been read in are %d",bytes_read);*/
         /* if empty string is provided or when length is 1 skip loop*/
 
-//        if (bytes_read == 1)
-//            continue;
+/*        if (bytes_read == 1)*/
+/*            continue;*/
 
         temp = strdup(command_input);
         _trim(temp);
         stringlen = strlen(temp);
-//        printf("The trimmed string is <%d>",stringlen);
+/*        printf("The trimmed string is <%d>",stringlen);*/
 /* handle case when a newline character is input to terminal*/
         if (stringlen == 0) {
             free(temp);
@@ -77,8 +83,8 @@ int main(int argc, char **argv) {
         else
             {
             /* ctrl-D not in string */
-//            printf("You typed (%ld): %s",nbytes,command_input);
-//            printf("After tokenization we have the following: \n");
+/*            printf("You typed (%ld): %s",nbytes,command_input);*/
+/*            printf("After tokenization we have the following: \n");*/
 
             /**
              * Below function should return a structure that is
@@ -91,10 +97,10 @@ int main(int argc, char **argv) {
             /* Ready to process structure of arguments*/
             /* if input_args_status is -1 if an error is reported was not found*/
             if (input_args_status < 0) {
-//                command_argument_struct_exec.arr = NULL;
+/*                command_argument_struct_exec.arr = NULL;*/
                 reset(&command_argument_struct_exec);
                 continue;
-                //free(command_argument_struct_exec.arr);
+                /*free(command_argument_struct_exec.arr);*/
             }
             else if (input_args_status == 0 )
             {
@@ -109,17 +115,17 @@ int main(int argc, char **argv) {
                                                                        &command_argument_struct_exec);
                     /* If command was found in path it will return a string else NULL*/
                     if (expanded_command_path != NULL) {
-//                 printf("We have expanded and the found path is %s\n", expanded_command_path);
+/*                 printf("We have expanded and the found path is %s\n", expanded_command_path);*/
                         /* Replace array index 0 with the found command full path*/
                         command_argument_struct_exec.arr[0] = expanded_command_path;
-//                 print(&command_argument_struct_exec);
+/*                 print(&command_argument_struct_exec);*/
                         command_argument_struct_exec.env_val_expansion = false;
-//                        printf("This is content of structure to be executed \n");
-//                        print(&command_argument_struct_exec);
-//                        printf("\n end of check\n");
+/*                        printf("This is content of structure to be executed \n");*/
+/*                        print(&command_argument_struct_exec);*/
+/*                        printf("\n end of check\n");*/
                         command_argument_struct_exec.env_val_expansion = false;
                         execute_command(&command_argument_struct_exec);
-//                        continue;
+/*                        continue;*/
                     }
                     else {
                         printf("%s: command not founds\n", command_argument_struct_exec.arr[0]);
@@ -144,7 +150,7 @@ int main(int argc, char **argv) {
              */
 
         }
-//            print(&command_argument_struct_exec);
+/*            print(&command_argument_struct_exec);*/
 
     } while (maintain_runtime_loop && no_eof_present);
     free(command_input);
@@ -156,27 +162,30 @@ int execute_command(op_t *pArgs) {
     /* call fork to execute the command*/
     /* Add NULL to end of ARRAY for ExecVE*/
 
-    char *command = peek(pArgs);
+	pid_t pid;
+	char *command;
+
+    command = peek(pArgs);
     enqueue(pArgs, NULL);
-//    printf("The size of filed array is %d", pArgs->_size);
+/*    printf("The size of filed array is %d", pArgs->_size);*/
     /**
      * Wrap execute within a fork
      * subprocess so that the
      * main thread is not replaced
      */
     /* Create a child process for the command execution*/
-    pid_t pid = fork();
+    pid = fork();
     /* If it failed, exit program*/
     if (pid == -1) {
         fprintf(stderr, "\nFailed to fork!\n");
         return (-1);
     }
-    char *arr3[2] = {"/usr", NULL};
+    /*char *arr3[2] = {"/usr", NULL};*/
     /* child instance*/
     if (pid == 0) {
-//        print(pArgs);
+/*        print(pArgs);*/
         execve(command, pArgs->arr, NULL);
-//        execvp(command, arr3);
+/*        execvp(command, arr3);*/
         fprintf(stderr, "\n%s Failed!", command);
         /* If you don't include this you will leave
          * zombie processes running
@@ -192,7 +201,7 @@ int execute_command(op_t *pArgs) {
 
 void reset(op_t *pArray)
 {
-    int i;
+    unsigned int i;
     for(i = 0; i < pArray->_size; i++)
         dequeue(pArray);
 }
