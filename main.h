@@ -24,12 +24,12 @@
 
 
 /* Function Declarations */
-void _trim(char * str); /*trims before and after command input*/
+void _trim(char *str); /*trims before and after command input*/
 char *_getenv(char *env_name); /*retrieves environment Variable Values*/
 bool file_exists(char *filepath); /*checks if file exists given its full path*/
-bool ReportError(char *token, char **argv ); /* report error when binary is not found*/
-int is_regular_file(const char* path);/* check if a file in a path is a regular file*/
-int isDirectory(const char* path);/* checks if a file is a directory*/
+bool ReportError(char *token, char **argv); /* report error when binary is not found*/
+int is_regular_file(const char *path);/* check if a file in a path is a regular file*/
+int isDirectory(const char *path);/* checks if a file is a directory*/
 
 typedef struct command_args
 {

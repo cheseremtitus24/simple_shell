@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/simple_shell.dir/_cmd_input_tokenizer.c.o CMakeFiles/simple_shell.dir/_cmd_path_search_tokenizer.c.o CMakeFiles/simple_shell.dir/_get_env.c.o CMakeFiles/simple_shell.dir/_trim.c.o CMakeFiles/simple_shell.dir/main.c.o CMakeFiles/simple_shell.dir/queue_functions.c.o CMakeFiles/simple_shell.dir/system_files_functions.c.o  -o simple_shell 
