@@ -17,6 +17,7 @@ int _input_tokenizer(char *command_input, char __attribute__((unused)) **argv,
 	char *token;
 	const char *whitespace = " \n\r\f\t\v";
 	char *temp = NULL;
+	char *stemp = NULL;
 
 	if (!command_input)
 	{
@@ -35,9 +36,11 @@ int _input_tokenizer(char *command_input, char __attribute__((unused)) **argv,
 	while (token != NULL)
 	{
 		/* Just Add token to queue */
-		enqueue(pOp, token);
+		stemp = strdup(token);
+		enqueue(pOp, stemp);
 		/* parse the token to ensure we evaluate the tokens properly */
 		token = strtok(NULL, whitespace);
 	}
+	free(temp);
 	return (0);
 }

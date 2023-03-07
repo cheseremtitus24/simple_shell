@@ -69,7 +69,8 @@ int execute_command(op_t *pArgs, char **argv)
 	 */
 	if (!command)
 	{
-		dprintf(2, "%s: 1:%s: not found\n", argv[0], peek(pArgs));
+		/*dprintf(2, "%s: 1:%s: not found\n", argv[0], peek(pArgs));*/
+		dprintf(2, "%s: No such file or directory", argv[0]);
 		reset(pArgs);
 		return (0);
 	}
@@ -103,5 +104,7 @@ int execute_command(op_t *pArgs, char **argv)
 	/* Parent process waits for the child to terminate*/
 	waitpid(pid, NULL, 0);
 	reset(pArgs);
+	if (command)
+		free(command);
 	return (0);
 }

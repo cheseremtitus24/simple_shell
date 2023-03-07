@@ -24,16 +24,17 @@ int main(int __attribute__((unused)) argc,
 	char __attribute__((unused)) **temp_ptr_arr;
 
 	command_input = NULL;
-	command_argument_struct_exec._size = 0;
 	temp = NULL;
 	maintain_runtime_loop = true;
 	no_eof_present = true;
+	command_argument_struct_exec._size = 0;
+	command_argument_struct_exec._capacity = 0;
 	/* repeat until a blank line is input */
 	while (maintain_runtime_loop && no_eof_present)
 	{
 		command_counter_control = 0;
 		/* prompt and gather input */
-		write(STDIN_FILENO, "$ ", 2);
+		/*write(STDOUT_FILENO, "$ ", 2);*/
 		bytes_read = getline(&command_input, &nbytes, stdin);
 		_trim(command_input);
 		/*printf("The bytes that have been read in are %d",bytes_read);*/
@@ -117,6 +118,8 @@ int main(int __attribute__((unused)) argc,
 		}
 
 	}
+	free(command_input);
+	free(command_argument_struct_exec.arr);
 	return (0);
 
 }
