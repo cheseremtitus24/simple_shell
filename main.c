@@ -24,6 +24,8 @@ int main(int __attribute__((unused)) argc,
 	char __attribute__((unused)) **temp_ptr_arr;
 
 	command_input = NULL;
+	command_argument_struct_exec._size = 0;
+	command_argument_struct_exec._capacity = 0;
 	temp = NULL;
 	maintain_runtime_loop = true;
 	no_eof_present = true;
@@ -116,6 +118,8 @@ int main(int __attribute__((unused)) argc,
 		}
 
 	}
+	free(command_input);
+	free(command_argument_struct_exec.arr);
 	return (0);
 
 }

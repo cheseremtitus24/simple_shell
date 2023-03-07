@@ -21,6 +21,8 @@ int execute_command(op_t *pArgs, char **argv)
 	int i;
 	char *command;
 
+	command = NULL;
+
 	/* Capture the command name and retrieve it from the env_var_list*/
 	/**
 	 * Check if the file exists and if so Proceed
@@ -103,6 +105,8 @@ int execute_command(op_t *pArgs, char **argv)
 	}
 	/* Parent process waits for the child to terminate*/
 	waitpid(pid, NULL, 0);
+	if (command)
+		free(command);
 	reset(pArgs);
 	return (0);
 }
