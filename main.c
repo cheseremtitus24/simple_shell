@@ -25,7 +25,6 @@ int main(int __attribute__((unused)) argc,
 
 	command_input = NULL;
 	command_argument_struct_exec._size = 0;
-	command_argument_struct_exec._capacity = 0;
 	temp = NULL;
 	maintain_runtime_loop = true;
 	no_eof_present = true;
