@@ -32,7 +32,8 @@ int main(int __attribute__((unused)) argc,
 	{
 		command_counter_control = 0;
 		/* prompt and gather input */
-		printf("$ ");
+		write(STDIN_FILENO, "$ ", 2);
+//		printf("$ ");
 		bytes_read = getline(&command_input, &nbytes, stdin);
 		_trim(command_input);
 		/*printf("The bytes that have been read in are %d",bytes_read);*/
