@@ -39,7 +39,5 @@ int _input_tokenizer(char *command_input, char __attribute__((unused)) **argv,
 		/* parse the token to ensure we evaluate the tokens properly */
 		token = strtok(NULL, whitespace);
 	}
-	if (temp)
-		free(temp);
 	return (0);
 }

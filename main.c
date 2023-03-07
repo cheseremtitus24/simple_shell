@@ -117,8 +117,6 @@ int main(int __attribute__((unused)) argc,
 		}
 
 	}
-	free(command_input);
-	free(command_argument_struct_exec.arr);
 	return (0);
 
 }
