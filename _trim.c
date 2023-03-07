@@ -4,7 +4,7 @@
 #include "main.h"
 
 /**
- * trim- Remove leading and trailing white space characters
+ * _trim- Remove leading and trailing white space characters
  * @str: string to be trimmed
  * Example: _trim(" Hello ") modifies input string to "Hello"
  * Return: void
@@ -50,6 +50,26 @@ void _trim(char *str)
 	/* Mark the next character to last non white space character as NULL */
 	str[index + 1] = '\0';
 }
+
+/**
+ * is_full- verifies if the array queue is full
+ * @array: array queue to process
+ *
+ * Return: true if is full else false
+ */
+bool is_full(op_t *array)
+{
+	if (array->_size >= array->_capacity)
+		return (true);
+	return (false);
+}
+/**
+ * print- visualizes the contents of the array
+ * @array: array queue to show items from
+ *
+ * Return: void
+ */
+
 void print(op_t *array)
 {
 	unsigned int index;

@@ -3,16 +3,23 @@
 
 /**
  * _getenv- Retrieves a malloc'd Value of an Environment Variable
- * @env_name: Environment Variable name to perform a Look up
+ * @name: Environment Variable name to perform a Look up
  * Return: Pointer to a string else NULL
  */
-char *_getenv(char *env_name)
+char *_getenv(const char *name)
 {
-	char *value = NULL;
-	char *retval = NULL;
+	extern char **environ;
+	char **env = environ;
+	size_t var_name_len = strlen(name);
 
-	value = getenv(env_name);
-	retval = strdup(value);
+	while (*env)
+	{
+		if (strncmp(*env, name, var_name_len) == 0 && (*env)[var_name_len] == '=')
+		{
+			return (*env + var_name_len + 1);
+		}
+		env++;
+	}
 
-	return (retval);
+	return (NULL);
 }

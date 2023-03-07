@@ -1,3 +1,0 @@
-/home/uwelekezo/Desktop/ALX/simple_shell/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/uwelekezo/Desktop/ALX/simple_shell/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/uwelekezo/Desktop/ALX/simple_shell/cmake-build-debug/CMakeFiles/simple_shell.dir
